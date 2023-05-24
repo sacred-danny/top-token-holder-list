@@ -1,7 +1,6 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import puppeteer from "puppeteer";
-import {add} from 'cheerio/lib/api/traversing.js';
 
 // const axiosResponse = await axios.request({
 //   method: "GET",
@@ -61,10 +60,9 @@ const getQuotes = async () => {
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
   const td = addressTds[0];
-  const children = $(td).children();
-  console.log('children length: ', children.length);
-  const address = $(children[0]);
-  console.log('address: ', address);
+  const items = $(td).children();
+  console.log('items length: ', items.length);
+  console.log('first item: ', $(items[0]));
   // for await (const td of addressTds) {
   //   const children = td.children;
   //   console.log('first children: ', children[0]);
