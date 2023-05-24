@@ -30,12 +30,12 @@ import puppeteer from "puppeteer";
 
 const PATHS = {
   win32: {
-    executablePath: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-    userDataDir: 'C:\\Users\\K\\AppData\\Local\\Temp\\puppeteer_user_data',
+    executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    userDataDir: 'C:\\Users\\root\\AppData\\Local\\Temp\\puppeteer_user_data',
   },
   linux: {
-    executablePath: "/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-    userDataDir: '/mnt/c/Users/K/AppData/Local/Temp/puppeteer_user_data',
+    executablePath: "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe",
+    userDataDir: '/mnt/c/Users/root/AppData/Local/Temp/puppeteer_user_data',
   },
 }
 
