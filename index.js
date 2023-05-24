@@ -59,16 +59,19 @@ const getQuotes = async () => {
   const content = await page.content();
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
-  for await (const td of addressTds) {
-    const item = $(td);
-    console.log('item: ', item);
-    const children = item.children();
-    if (children.length > 0) {
-      const address = $(children[0]).innerText;
-      const innerText = $(children[children.length - 1]).innerText;
-      console.log(`address: ${address}, innerText: ${innerText}`);
-    }
-  }
+  const td = addressTds[0];
+  const children = td.children;
+  console.log('children length: ', children.length);
+  console.log('first child: ', children[0]);
+  // for await (const td of addressTds) {
+  //   const children = td.children;
+  //   console.log('first children: ', children[0]);
+  //   if (children.length > 0) {
+  //     const address = $(children[0]).innerText;
+  //     const innerText = $(children[children.length - 1]).innerText;
+  //     console.log(`address: ${address}, innerText: ${innerText}`);
+  //   }
+  // }
 };
 
 // Start the scraping
