@@ -4,6 +4,9 @@ import axios from 'axios';
 const axiosResponse = await axios.request({
   method: "GET",
   url: "https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick/",
+  headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+  }
 });
 
 if (axiosResponse && axiosResponse.data) {
