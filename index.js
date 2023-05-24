@@ -61,7 +61,6 @@ const getQuotes = async () => {
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
   console.log('addressTds length: ', addressTds.length);
-  console.log('evens length: ', evens.length);
   for await (const td of addressTds) {
     const item = $(td);
     const children = item.children();
