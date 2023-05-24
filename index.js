@@ -9,7 +9,9 @@ const axiosResponse = await axios.request({
 if (axiosResponse && axiosResponse.data) {
   const $ = await cheerio.load(axiosResponse.data);
   const addressTds = $('.toggle-inline-controls');
+  const evens = $('.even');
   console.log('addressTds length: ', addressTds.length);
+  console.log('evens length: ', evens.length);
   for await (const td of addressTds) {
     const item = $(td);
     const children = item.children();
