@@ -3,12 +3,11 @@ import axios from 'axios';
 
 const axiosResponse = await axios.request({
   method: "GET",
-  url: "https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick",
+  url: "https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick/",
 });
 
 if (axiosResponse && axiosResponse.data) {
   const $ = await cheerio.load(axiosResponse.data);
-  console.log('$: ', $);
   const addressTds = $('.toggle-inline-controls');
   console.log('addressTds length: ', addressTds.length);
   for await (const td of addressTds) {
