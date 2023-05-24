@@ -62,7 +62,7 @@ const getQuotes = async () => {
   const td = addressTds[0];
   const children = td.children;
   console.log('children length: ', children.length);
-  console.log('first child: ', children[0]);
+  console.log('first child: ', children[0].innerText);
   // for await (const td of addressTds) {
   //   const children = td.children;
   //   console.log('first children: ', children[0]);
