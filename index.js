@@ -57,12 +57,11 @@ const getQuotes = async () => {
   });
 
   const content = await page.content();
-  console.log('content: ', content);
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
-  console.log('addressTds length: ', addressTds.length);
   for await (const td of addressTds) {
     const item = $(td);
+    console.log('item: ', item);
     const children = item.children();
     if (children.length > 0) {
       const address = $(children[0]).innerText;
