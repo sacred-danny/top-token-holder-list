@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import axios from 'axios';
 
 const axiosResponse = await axios.request({
@@ -7,7 +7,6 @@ const axiosResponse = await axios.request({
 });
 
 if (axiosResponse && axiosResponse.data) {
-  console.log('data: ', axiosResponse.data);
   const $ = cheerio.load(axiosResponse.data);
   const addressTds = $('.toggle-inline-controls');
   console.log('addressTds length: ', addressTds.length);
