@@ -53,7 +53,7 @@ const getQuotes = async () => {
   // - open the "http://quotes.toscrape.com/" website
   // - wait until the dom content is loaded (HTML is ready)
   await page.goto("https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick&pageTab=holders&tab=tab-holders&pageSize=100&holders=1", {
-    timeout: 3000
+    timeout: 10000
   });
 
   const content = await page.content();
