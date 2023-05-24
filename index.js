@@ -60,10 +60,10 @@ const getQuotes = async () => {
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
   const td = addressTds[0];
-  const children = td.children;
+  const children = $(td).children();
   console.log('children length: ', children.length);
   children.forEach((child, index) => {
-    console.log(`${index} child: `, child);
+    console.log(`${index} child: `, $(child));
   })
   // for await (const td of addressTds) {
   //   const children = td.children;
