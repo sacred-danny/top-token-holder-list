@@ -55,7 +55,24 @@ const getQuotes = async () => {
   await page.goto("https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick&pageTab=holders&tab=tab-holders&pageSize=100&holders=1", {
     waitUntil: "domcontentloaded",
   });
+
+  const content = await page.content();
+  console.log('content: ', content);
+  const $ = await cheerio.load(content);
+  const addressTds = $('.toggle-inline-controls');
+  console.log('addressTds length: ', addressTds.length);
+  console.log('evens length: ', evens.length);
+  for await (const td of addressTds) {
+    const item = $(td);
+    const children = item.children();
+    if (children.length > 0) {
+      const address = $(children[0]).innerText;
+      const innerText = $(children[children.length - 1]).innerText;
+      console.log(`address: ${address}, innerText: ${innerText}`);
+    }
+  }
 };
 
 // Start the scraping
 getQuotes();
+
