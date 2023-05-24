@@ -62,7 +62,9 @@ const getQuotes = async () => {
   const td = addressTds[0];
   const children = td.children;
   console.log('children length: ', children.length);
-  console.log('first child: ', children[0].innerText);
+  children.forEach((child, index) => {
+    console.log(`${index} child: `, child);
+  })
   // for await (const td of addressTds) {
   //   const children = td.children;
   //   console.log('first children: ', children[0]);
