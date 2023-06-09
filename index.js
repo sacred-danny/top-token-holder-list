@@ -20,9 +20,9 @@ const getTopHolderList = async () => {
     defaultViewport: null,
   });
 
-  let pageIndex = 1;
+  let pageIndex = 101;
   let page = null;
-  while (pageIndex <= 100) {
+  while (pageIndex <= 200) {
     try {
       page = await browser.newPage();
       await page.goto(`https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick&pageTab=holders&tab=tab-holders&pageSize=100&holders=${pageIndex}`, {
