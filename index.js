@@ -1,19 +1,19 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer';
+import * as fs from 'fs';
 
 const PATHS = {
   win32: {
-    executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     userDataDir: 'C:\\Users\\root\\AppData\\Local\\Temp\\puppeteer_user_data',
   },
   linux: {
-    executablePath: "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe",
+    executablePath: '/mnt/c/Program Files/Google/Chrome/Application/chrome.exe',
     userDataDir: '/mnt/c/Users/root/AppData/Local/Temp/puppeteer_user_data',
   },
 }
 
-const getQuotes = async () => {
+const getTopHolderList = async () => {
   const browser = await puppeteer.launch({
     executablePath: PATHS[process.platform].executablePath,
     headless: false,
@@ -22,7 +22,6 @@ const getQuotes = async () => {
 
   let pageIndex = 1;
   const page = await browser.newPage();
-  const addresses = [];
 
   while (true && pageIndex < 3) {
     try {
@@ -34,31 +33,15 @@ const getQuotes = async () => {
       const addressTds = $('.toggle-inline-controls');
       for (let i = 0; i < addressTds.length; i++) {
         const items = $(addressTds[i]).children();
-        const address = (items[0].children[0].data || '').toLowerCase();
-        addresses.push(address);
+        const address = (items[0].children[0].data || '').toLowerCase() + '\n';
+        await fs.writeFileSync('./address.txt', address, {flag: 'a+'});
       }
-      console.log('address: ', addresses.length);
       pageIndex++;
     } catch (e) {
       console.log(e);
     }
   }
-
-  // const td = addressTds[0];
-  // const items = $(td).children();
-  // console.log('items length: ', items.length);
-  // console.log('first item: ', items[0].children[0].data);
-  // for await (const td of addressTds) {
-  //   const children = td.children;
-  //   console.log('first children: ', children[0]);
-  //   if (children.length > 0) {
-  //     const address = $(children[0]).innerText;
-  //     const innerText = $(children[children.length - 1]).innerText;
-  //     console.log(`address: ${address}, innerText: ${innerText}`);
-  //   }
-  // }
 };
 
-// Start the scraping
-getQuotes();
+getTopHolderList().then();
 
