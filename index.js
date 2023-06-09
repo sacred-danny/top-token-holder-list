@@ -38,7 +38,7 @@ const getQuotes = async () => {
         const address = (items[0].children[0].data || '').toLowerCase();
         addresses.push(address);
       }
-      console.log('address: ', addresses);
+      console.log('address: ', addresses.length);
       pageIndex++;
     } catch (e) {
       console.log(e);
