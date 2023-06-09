@@ -48,7 +48,7 @@ const getQuotes = async () => {
 
   // Open a new page
   const page = await browser.newPage();
-
+  let addresses = [];
   // On this new page:
   // - open the "http://quotes.toscrape.com/" website
   // - wait until the dom content is loaded (HTML is ready)
@@ -59,19 +59,12 @@ const getQuotes = async () => {
   const content = await page.content();
   const $ = await cheerio.load(content);
   const addressTds = $('.toggle-inline-controls');
-  const td = addressTds[0];
-  const items = $(td).children();
-  console.log('items length: ', items.length);
-  console.log('first item: ', items[0].children[0].data);
-  // for await (const td of addressTds) {
-  //   const children = td.children;
-  //   console.log('first children: ', children[0]);
-  //   if (children.length > 0) {
-  //     const address = $(children[0]).innerText;
-  //     const innerText = $(children[children.length - 1]).innerText;
-  //     console.log(`address: ${address}, innerText: ${innerText}`);
-  //   }
-  // }
+  addressTds.forEach((td) => {
+    const items = td.children();
+    const address = items[0].children[0].data;
+    addresses.push(address);
+  });
+  console.log('address list: ', addresses);
 };
 
 // Start the scraping
