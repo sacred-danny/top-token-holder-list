@@ -42,6 +42,7 @@ const getTopHolderList = async () => {
       console.log(e);
     }
   }
+  process.exit();
 };
 
 getTopHolderList().then();
