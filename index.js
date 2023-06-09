@@ -21,10 +21,10 @@ const getTopHolderList = async () => {
   });
 
   let pageIndex = 1;
-  const page = await browser.newPage();
-
+  let page = null;
   while (true && pageIndex < 3) {
     try {
+      page = await browser.newPage();
       await page.goto(`https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick&pageTab=holders&tab=tab-holders&pageSize=100&holders=${pageIndex}`, {
         waitUntil: 'networkidle0'
       });
@@ -37,6 +37,7 @@ const getTopHolderList = async () => {
         await fs.writeFileSync('./address.txt', address, {flag: 'a+'});
       }
       pageIndex++;
+      await page.close();
     } catch (e) {
       console.log(e);
     }
