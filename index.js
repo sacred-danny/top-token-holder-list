@@ -21,23 +21,24 @@ const getTopHolderList = async () => {
   });
 
   let pageIndex = 1;
-  let page = null;
-  while (pageIndex <= 400) {
+  let page = await browser.newPage();
+  while (pageIndex <= 4) {
     try {
-      page = await browser.newPage();
       await page.goto(`https://ethplorer.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7#chart=candlestick&pageTab=holders&tab=tab-holders&pageSize=100&holders=${pageIndex}`, {
         waitUntil: 'networkidle0'
       });
+      await page.reload();
       const content = await page.content();
       const $ = await cheerio.load(content);
       const addressTds = $('.toggle-inline-controls');
       for (let i = 0; i < addressTds.length; i++) {
         const items = $(addressTds[i]).children();
         const address = (items[0].children[0].data || '').toLowerCase() + '\n';
-        await fs.writeFileSync('./address.txt', address, {flag: 'a+'});
+        if (address.indexOf('0x') >= 0) {
+          await fs.writeFileSync('./address.txt', address, {flag: 'a+'});
+        }
       }
       pageIndex++;
-      await page.close();
     } catch (e) {
       console.log(e);
     }
