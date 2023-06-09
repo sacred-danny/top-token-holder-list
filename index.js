@@ -32,7 +32,6 @@ const getQuotes = async () => {
       const content = await page.content();
       const $ = await cheerio.load(content);
       const addressTds = $('.toggle-inline-controls');
-      console.log('addressTds length: ', addressTds.length);
       for (let i = 0; i < addressTds.length; i++) {
         const items = $(addressTds[i]).children();
         const address = (items[0].children[0].data || '').toLowerCase();
