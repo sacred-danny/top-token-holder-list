@@ -62,7 +62,7 @@ const getQuotes = async () => {
   console.log('addressTds length: ', addressTds.length);
   for (let i = 0; i < addressTds.length; i++) {
     const items = $(addressTds[i]).children();
-    const address = items[0].children[0].data;
+    const address = (items[0].children[0].data || '').toLowerCase();
     addresses.push(address);
   }
   console.log('address: ', addresses);
