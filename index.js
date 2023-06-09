@@ -34,6 +34,7 @@ const getTopHolderList = async () => {
       for (let i = 0; i < addressTds.length; i++) {
         const items = $(addressTds[i]).children();
         const address = (items[0].children[0].data || '').toLowerCase() + '\n';
+        console.log('address: ', address);
         if (address.indexOf('0x') >= 0) {
           await fs.writeFileSync('./address.txt', address, {flag: 'a+'});
         }
